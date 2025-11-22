@@ -53,10 +53,9 @@ jobs:
         env:
           NODE_ENV: production
           GITHUB_PAGES: true
-          # 设置base路径为仓库名，例如 /video-to-mp3-converter/
-          # 如果使用自定义域名或用户/组织页面，设置为 '/'
-          BASE_PATH: ${{ github.event.repository.name != github.repository_owner && format('/{0}/', github.event.repository.name) || '/' }}
-
+                   # 设置base路径为仓库名 /video-to-mp3-converter/
+          BASE_PATH: /${{ github.event.repository.name }}/
+          VITE_APP_TITLE: 视频转MP3转换器
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
