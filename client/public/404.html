@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>视频转MP3转换器</title>
+  <script>
+    // 将404页面重定向到index.html，并保留路径信息
+    // 这样SPA路由就可以正确处理URL
+    (function() {
+      var pathSegmentsToKeep = 1; // 对于 /video-to-mp3-converter/ 这种子路径，保留1个段
+      
+      var l = window.location;
+      
+      // 将当前路径转换为查询参数，这样index.html可以恢复正确的路由
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + '/?/' +
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    })();
+  </script>
+</head>
+<body>
+  <!-- GitHub Pages SPA 路由重定向 -->
+</body>
+</html>
+
