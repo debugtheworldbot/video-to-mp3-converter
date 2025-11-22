@@ -12,7 +12,7 @@ export default defineConfig({
   // GitHub Pages部署时需要设置base路径为仓库名
   // 例如: base: '/video-to-mp3-converter/'
   // 本地开发时使用 '/'
-  base: process.env.GITHUB_PAGES === 'true' ? process.env.BASE_PATH || '/' : '/',
+  base: process.env.NODE_ENV === 'production' ? './' : '/',
   plugins,
   resolve: {
     alias: {
