@@ -14,6 +14,12 @@ export default defineConfig({
   // 本地开发时使用 '/'
   base: process.env.NODE_ENV === 'production' ? '/video-to-mp3-converter/' : '/',
   plugins,
+  worker: {
+    format: 'es',
+  },
+  optimizeDeps: {
+    exclude: ['@ffmpeg/ffmpeg', '@ffmpeg/util'],
+  },
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "client", "src"),
@@ -31,9 +37,11 @@ export default defineConfig({
     port: 3000,
     strictPort: false, // Will find next available port if 3000 is busy
     host: true,
+    // Note: COEP/COOP headers are needed for SharedArrayBuffer support in FFmpeg
+    // but can cause issues with some dependencies. Keep them for now since FFmpeg needs them.
     headers: {
-      "Cross-Origin-Opener-Policy": "same-origin",
       "Cross-Origin-Embedder-Policy": "require-corp",
+      "Cross-Origin-Opener-Policy": "same-origin",
     },
     allowedHosts: [
       ".manuspre.computer",
@@ -45,8 +53,8 @@ export default defineConfig({
       "127.0.0.1",
     ],
     fs: {
-      strict: true,
-      deny: ["**/.*"],
+      strict: false,
+      allow: ['..'],
     },
   },
 });
